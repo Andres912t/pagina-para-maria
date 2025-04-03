@@ -24,6 +24,12 @@
         input[type="file"] {
             margin-top: 10px;
         }
+        #preview {
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -32,7 +38,23 @@
         <p>María, eres una persona increíble. Gracias por ser tan especial y hermosa. Esta página es solo para ti.</p>
         <h2>Nuestros Recuerdos</h2>
         <p>Aquí puedes adjuntar fotos de nosotros y de tus cosas favoritas de química:</p>
-        <input type="file" accept="image/*">
-    </div>
+        <input type="file" accept="image/*" id="fileInput">
+        <br>
+        <img id="preview" src="" alt="Vista previa de la imagen" style="display:none;">
+    </div><script>
+    document.getElementById("fileInput").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById("preview");
+                img.src = e.target.result;
+                img.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
 </body>
 </html>
