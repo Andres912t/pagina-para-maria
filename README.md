@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para María</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
     <style>
         body {
             background-color: pink;
@@ -42,16 +44,35 @@
         <br>
         <img id="preview" src="" alt="Vista previa de la imagen" style="display:none;">
     </div><script>
+    const firebaseConfig = {
+        apiKey: "TU_API_KEY",
+        authDomain: "TU_PROYECTO.firebaseapp.com",
+        projectId: "TU_PROYECTO",
+        storageBucket: "TU_PROYECTO.appspot.com",
+        messagingSenderId: "TU_MENSAJERIA_ID",
+        appId: "TU_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const storage = firebase.storage();
+
     document.getElementById("fileInput").addEventListener("change", function(event) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                const img = document.getElementById("preview");
-                img.src = e.target.result;
-                img.style.display = "block";
+                document.getElementById("preview").src = e.target.result;
+                document.getElementById("preview").style.display = "block";
             };
             reader.readAsDataURL(file);
+
+            const storageRef = storage.ref("imagenes/" + file.name);
+            storageRef.put(file).then(() => {
+                alert("Imagen subida exitosamente");
+                storageRef.getDownloadURL().then(url => {
+                    document.getElementById("preview").src = url;
+                });
+            });
         }
     });
 </script>
