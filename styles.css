@@ -1,56 +1,25 @@
-body {
-    background: linear-gradient(to right, #ffebf0, #ffd6e0, #ffb3c1);
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    display: flex;
-    margin: 0;
-    padding: 0;
+// Enviar mensaje a María
+function enviarMensajeAMaria() {
+    let mensaje = document.getElementById('mensaje').value;
+    let numeroMaria = "573145954548"; // Número de María
+
+    if (mensaje.trim() !== '') {
+        let url = `https://wa.me/${numeroMaria}?text=${encodeURIComponent(mensaje)}`;
+        window.open(url, '_blank');
+    } else {
+        alert("Escribe un mensaje antes de enviarlo.");
+    }
 }
-.sidebar {
-    width: 250px;
-    background: rgba(255, 90, 140, 0.9);
-    padding: 20px;
-    position: fixed;
-    height: 100vh;
-    overflow: auto;
-    border-radius: 0 20px 20px 0;
-}
-.sidebar h2, .sidebar a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-}
-.sidebar a:hover {
-    background: white;
-    color: #ff4e50;
-}
-.content {
-    margin-left: 270px;
-    width: calc(100% - 270px);
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-}
-h1, h2 {
-    color: #ff3366;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-}
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-button {
-    background: #ff4e50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-button:hover {
-    background: #ff1a33;
+
+// Enviar mensaje a Jeferson
+function enviarMensajeParaMi() {
+    let mensaje = document.getElementById('mensajeParaMi').value;
+    let numeroJeferson = "573174118938"; // Tu número
+
+    if (mensaje.trim() !== '') {
+        let url = `https://wa.me/${numeroJeferson}?text=${encodeURIComponent(mensaje)}`;
+        window.open(url, '_blank');
+    } else {
+        alert("Escribe un mensaje antes de enviarlo.");
+    }
 }
